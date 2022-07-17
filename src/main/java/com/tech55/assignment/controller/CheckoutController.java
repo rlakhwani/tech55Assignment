@@ -42,7 +42,9 @@ public class CheckoutController {
 		
 		if(promoCode != 0) {
 			PromotionBOImpl promoBO = promoBORepo.getPromotionBO(promoCode);
-			checkoutBO.applyPromo(promoBO);
+			if(promoBO != null) {
+				checkoutBO.applyPromo(promoBO);
+			}
 		}
 		
 		int price = checkoutBO.total();

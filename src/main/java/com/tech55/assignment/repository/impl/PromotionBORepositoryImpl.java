@@ -20,10 +20,11 @@ public class PromotionBORepositoryImpl implements PromotionBORepository{
 	
 	public PromotionBOImpl getPromotionBO(int promocode){
 		Promotion promotion = promotionRepo.findByPromoId(promocode);
-		PromotionType promoType= promoTypeRepo.findByPromoTypeId(promotion.getPromoTypeId());
-		
-		PromotionBOImpl promotionBOImpl = new PromotionBOImpl(promotion.getPromoCode(),promoType);
-		
+		PromotionBOImpl promotionBOImpl = null;
+		if(promotion != null) {
+			PromotionType promoType= promoTypeRepo.findByPromoTypeId(promotion.getPromoTypeId());
+			promotionBOImpl = new PromotionBOImpl(promotion.getPromoCode(),promoType);
+		}
 		return promotionBOImpl;
 	}
 	
